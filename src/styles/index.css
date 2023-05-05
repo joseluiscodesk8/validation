@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(70deg, #2e062c, #8a4987, #2e062c);
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  position: relative;
+}
+header picture img {
+  width: 20px;
+}
+header nav {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 300px;
+  position: absolute;
+  top: 60px;
+  left: 0;
+}
+header nav ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  position: relative;
+  left: -100%;
+  box-shadow: inset 0 10px 10px #2e062c;
+  transition: 0.8s;
+}
+header nav ul li:hover {
+  background: #141612;
+}
+header nav ul li:nth-child(1) {
+  transition-delay: 0.1s;
+}
+header nav ul li:nth-child(2) {
+  transition-delay: 0.2s;
+}
+header nav ul li:nth-child(3) {
+  transition-delay: 0.3s;
+}
+header nav ul li:nth-child(4) {
+  transition-delay: 0.4s;
+}
+header nav ul li:nth-child(5) {
+  transition-delay: 0.5s;
+}
+header nav ul li:nth-child(6) {
+  transition-delay: 0.6s;
+}
+header nav ul li a {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2b0329;
+  text-decoration: none;
+}
+header h1 {
+  opacity: 1;
+  transition: 0.5s;
+  transition-delay: 0.3s;
+}
+header #search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 200px;
+  height: 100%;
+  position: absolute;
+}
+header #search picture img {
+  width: 18px;
+}
+header #search input {
+  opacity: 0;
+  width: 0;
+  height: 28px;
+  transform: translate(-10px);
+  transition: 0.8s;
+}/*# sourceMappingURL=index.css.map */
