@@ -6,10 +6,19 @@ const searchInput = document.getElementById("search-input");
 const searchIcon = document.getElementById("search-icon");
 
 function changeIcon() {
-  button.src = "./icons/cruz.png";
+  if (li[0].style.left == "-100%") {
+    button.src = "./icons/menu.png";
+  } else {
+    button.src = "./icons/cruz.png";
+  }
 }
-function returnIcon() {
-  button.src = "./icons/menu.png";
+
+function imgBlur() {
+  if (li[0].style.left == "-100%") {
+    imgApi.style.filter = "blur(0)";
+  } else {
+    imgApi.style.filter = "blur(10px)";
+  }
 }
 
 button.addEventListener("click", () => {
@@ -28,6 +37,7 @@ button.addEventListener("click", () => {
     li[4].style.left = "0";
     li[5].style.left = "0";
     changeIcon();
+    imgBlur();
   } else {
     li[0].style.left = "-100%";
     li[1].style.left = "-100%";
@@ -35,7 +45,8 @@ button.addEventListener("click", () => {
     li[3].style.left = "-100%";
     li[4].style.left = "-100%";
     li[5].style.left = "-100%";
-    returnIcon();
+    changeIcon();
+    imgBlur();
   }
 });
 
@@ -54,3 +65,5 @@ searchIcon.addEventListener("click", () => {
     h1.style.opacity = "1";
   }
 });
+
+getImgApi();

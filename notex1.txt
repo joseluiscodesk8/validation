@@ -1,0 +1,203 @@
+const URL = "https://api.thecatapi.com/v1/images/search";
+
+fetch(URL)
+  .then((res) => res.json())
+  .then((data) => {
+    const img = document.querySelector("img");
+    img.src = data[0].url;
+  });
+
+
+const API_URL = "https://api.thecatapi.com/v1/images/search";
+
+async function reload() {
+  const res = await fetch(API_URL);
+  const data = await res.json();
+
+  const img = document.querySelector("img");
+  img.src = data[0].url;
+}
+
+
+async function savefavoriteMichis() {
+  const res = await fetch(API_URL_FAVORITES, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      image_id: "dje",
+    }),
+  });
+  const data = await res.json();
+  console.log(res);
+
+  if (res.status !== 200) {
+    spanError.innerHTML = "hubo un error:" + res.status + data.message;
+  }
+}
+
+///
+
+1XX Respuestas Afirmativas
+
+2XX Respuestas satisfactorias
+
+3XX Re-direcciones
+
+4XX Error del cliente
+
+5XX Error de servidor
+
+//
+
+HTTP Methods
+
+GET Lee datos del server (Solo Lectura)
+
+HEAD Recupera datos de los headers (Solo Lectura)
+
+POST Envía datos al server
+
+PUT/PATCH Salva datos en el server
+
+DELETE Borra datos del server
+
+
+/// HEADERS
+
+Content-type
+
+Authorization
+
+Cookies
+
+Location
+
+// API KEY 
+
+query parameter
+
+?api_key=ABC123
+
+Authorization headers
+
+X-API-KEY: ABC123
+
+//////////////////////////
+
+const API_URL_RANDOM =
+  "https://api.thecatapi.com/v1/images/search?limit=2&api_key=live_vwZVBSFq81Dvz4YneBhZQv4QWhFGNKjgH1OtXT5RLJZhHQe3wKqMQoMS7SxIUhWa";
+
+const API_URL_FAVORITES = "https://api.thecatapi.com/v1/favourites";
+
+const API_URL_FAVORITES_DELETE = (id) =>
+  `https://api.thecatapi.com/v1/favourites${id}`;
+
+const API_URL_UDLOAD = "https://api.thecatapi.com/v1/images/upload";
+
+const spanError = document.querySelector("#error");
+
+async function loadRandomMichis() {
+  const res = await fetch(API_URL_RANDOM);
+  const data = await res.json();
+
+  if (res.status !== 200) {
+    spanError.innerHTML = "hubo un error:" + res.status;
+  } else {
+    const img1 = document.querySelector("#img1");
+    const img2 = document.querySelector("#img2");
+    const btn1 = document.querySelector("#btn1");
+    const btn2 = document.querySelector("#btn2");
+
+    img1.src = data[0].url;
+    img2.src = data[1].url;
+
+    btn1.onclick = () => savefavoriteMichis(data[0].id);
+    btn2.onclick = () => savefavoriteMichis(data[1].id);
+  }
+  // console.log(res);
+}
+
+async function loadFavoritesMichis() {
+  const res = await fetch(API_URL_FAVORITES, {
+    method: "GET",
+    headers: {
+      "X-API-KEY":
+        "live_vwZVBSFq81Dvz4YneBhZQv4QWhFGNKjgH1OtXT5RLJZhHQe3wKqMQoMS7SxIUhWa",
+    },
+  });
+  const data = await res.json();
+
+  if (res.status !== 200) {
+    spanError.innerHTML = "hubo un error:" + res.status + data.message;
+  } else {
+    data.forEach((michi) => {
+      const section = document.querySelector("#favoriteMichis");
+      const article = document.createElement("article");
+      const img = document.createElement("img");
+      const btn = document.createElement("buttton");
+      const btnText = document.createTextNode("sacar al michi de favoritos");
+
+      btn.appendChild(btnText);
+      btn.onclick = () => deletefavoriteMichis(michi.id);
+      img.src = michi.url;
+      article.appendChild(img);
+      article.appendChild(btn);
+      section.appendChild(article);
+    });
+  }
+  console.log(res);
+}
+
+async function savefavoriteMichis(id) {
+  const res = await fetch(API_URL_FAVORITES, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-KEY":
+        "live_vwZVBSFq81Dvz4YneBhZQv4QWhFGNKjgH1OtXT5RLJZhHQe3wKqMQoMS7SxIUhWa",
+    },
+    body: JSON.stringify({
+      image_id: id,
+    }),
+  });
+  const data = await res.json();
+  console.log(res);
+
+  if (res.status !== 200) {
+    spanError.innerHTML = "hubo un error:" + res.status + data.message;
+  }
+}
+
+async function deletefavoriteMichis(id) {
+  const res = await fetch(API_URL_FAVORITES_DELETE(id), {
+    method: "DELETE",
+    headers: {
+      "X-API-KEY":
+        "live_vwZVBSFq81Dvz4YneBhZQv4QWhFGNKjgH1OtXT5RLJZhHQe3wKqMQoMS7SxIUhWa",
+    },
+  });
+  const data = await res.json();
+  console.log(res);
+  loadFavoritesMichis();
+}
+
+async function uploadMichiPhoto() {
+  const from = document.getElementById("uploadingForm");
+  const formData = new formData(form);
+
+  const res = await fetch(API_URL_UDLOAD, {
+    method: "POST",
+    headers: {
+      // el body: con el formData le da toda la imformacion al back no es necesario agregar el content type
+      // "Content-Type": "multipart/from-data",
+      "X-API-KEY":
+        "live_vwZVBSFq81Dvz4YneBhZQv4QWhFGNKjgH1OtXT5RLJZhHQe3wKqMQoMS7SxIUhWa",
+    },
+    body: formData,
+  });
+}
+
+loadRandomMichis();
+loadFavoritesMichis();

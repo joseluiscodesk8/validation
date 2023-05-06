@@ -1,2 +1,14 @@
 @use "./components/GlobalStyles";
 @use "./components/Headers";
+
+.imgApi-container {
+  position: relative;
+  z-index: -1000;
+  margin: 20px auto;
+  width: 80%;
+  & img {
+    width: 100%;
+    box-shadow: 0 0 15px #000;
+    transition: 1s;
+  }
+}

@@ -89,4 +89,16 @@ header #search input {
   height: 28px;
   transform: translate(-10px);
   transition: 0.8s;
+}
+
+.imgApi-container {
+  position: relative;
+  z-index: -1000;
+  margin: 20px auto;
+  width: 80%;
+}
+.imgApi-container img {
+  width: 100%;
+  box-shadow: 0 0 15px #000;
+  transition: 1s;
 }/*# sourceMappingURL=index.css.map */
