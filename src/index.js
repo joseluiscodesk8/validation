@@ -36,6 +36,9 @@ button.addEventListener("click", () => {
     li[3].style.left = "0";
     li[4].style.left = "0";
     li[5].style.left = "0";
+    searchInput.style.opacity = "0";
+    searchInput.style.width = "0";
+    h1.style.opacity = "1";
     changeIcon();
     imgBlur();
   } else {
@@ -59,6 +62,14 @@ searchIcon.addEventListener("click", () => {
     searchInput.style.opacity = "1";
     searchInput.style.width = "170px";
     h1.style.opacity = "0";
+    li[0].style.left = "-100%";
+    li[1].style.left = "-100%";
+    li[2].style.left = "-100%";
+    li[3].style.left = "-100%";
+    li[4].style.left = "-100%";
+    li[5].style.left = "-100%";
+    changeIcon();
+    imgBlur();
   } else {
     searchInput.style.opacity = "0";
     searchInput.style.width = "0px";
